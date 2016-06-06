@@ -14,34 +14,19 @@ import {XmlConverter} from '../server/xmlConverter'
 chai.use(chaiAsPromised)
 chai.should()
 
-describe("Hei", () => {
-	it("should", () => {
-/*		let x2js = new X2JSFactory();
-
-		console.log(x2js)
-
-		let xmlStr = "<item><subItem>text</subItem><subItem>habla!</subItem></item>"
-		let node = x2js.parseXml(xmlStr)
-		let json = x2js.xml2json<any>(node)
-
-		console.log(json.item) */
-/*		let x = new DOMParser()
-		let result = x.parseFromString("<item><subItem>text</subItem><subItem>habla!</subItem></item>", "application/xml")
-
- 		console.log(result) */
-
-/*		let x = parseString("<item><subItem>text</subItem><subItem>habla!</subItem></item>", (err, result) => {
-			console.dir(result)
-		}) */
-
+describe("The xml converter", () => {
+	it("should deal with inline xml", () => {
 		let xml = new XmlConverter()
 
-		let convPromise = xml.convert("<item><subItem><a>text</a></subItem><subItem><b>habla!</b></subItem></item>")
-		convPromise.then(x => console.dir(x))
+		let convPromise = xml.convert("<rsp><ideas><idea><id>abc</id><title>text</title></idea></ideas></rsp>")
 		let result = convPromise.then(res => {
-			res.should.have.property("item")
-			res.item.subItem.should.be.instanceof(Array)
-			res.item.subItem[0].a[0].should.equal("text")
+			res.should.have.property("rsp")
+			res.rsp.ideas.should.be.instanceof(Array)
+			res.rsp.ideas.length.should.equal(1)
+			res.rsp.ideas[0].should.have.property("title")
+			res.rsp.ideas[0].title.should.equal("text")
+			res.rsp.ideas[0].parentId.should.equal("")
+			res.rsp.ideas[0].id.should.equal("abc")
 			return Promise.resolve("it worked")
 		})
 		return result.should.eventually.equal("it worked")
@@ -63,10 +48,11 @@ describe("Hei", () => {
 			convPromise.catch(err => {
 				reject(err)
 			})
-		})).then((res : any) => {
+		})).then((res: Contracts.MindmeisterData) => {
 			res.should.have.property("rsp")
-			res.rsp.ideas.length.should.equal(1)
-			res.rsp.ideas[0].idea.length.should.equal(32)
+			res.rsp.ideas.length.should.equal(32)
+			res.rsp.ideas[0].id.should.equal("711134826")
+			res.rsp.ideas[0].title.should.equal("Root")
 			return Promise.resolve("it worked")
 		}).should.eventually.equal("it worked")
 	})
