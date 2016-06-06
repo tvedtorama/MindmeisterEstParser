@@ -2,10 +2,12 @@
 /// <reference path="../typings/chai/chai.d.ts" />
 /// <reference path="../typings/chai-as-promised/chai-as-promised.d.ts" />
 /// <reference path="../node_modules/typemoq/typemoq.node.d.ts" />
+/// <reference path="../typings/node/node.d.ts" />
 
 import * as chai from 'chai'
 import * as chaiAsPromised from 'chai-as-promised'
 import {Mock, It, Times} from 'typemoq'
+import * as fs from 'fs'
 
 import {XmlConverter} from '../server/xmlConverter'
 
@@ -43,5 +45,29 @@ describe("Hei", () => {
 			return Promise.resolve("it worked")
 		})
 		return result.should.eventually.equal("it worked")
+	})
+
+	it("should load a real file", () => {
+		return new Promise((resolve, reject) => fs.readFile("./tests/sampleMindmeister.xml", (err, data) => {
+			if (err) {
+				reject(err)
+				return
+			}
+
+			let xml = new XmlConverter();
+			let convPromise = xml.convert(data)
+
+			let result = convPromise.then(res => {
+				resolve(res)
+			})
+			convPromise.catch(err => {
+				reject(err)
+			})
+		})).then((res : any) => {
+			res.should.have.property("rsp")
+			res.rsp.ideas.length.should.equal(1)
+			res.rsp.ideas[0].idea.length.should.equal(32)
+			return Promise.resolve("it worked")
+		}).should.eventually.equal("it worked")
 	})
 })

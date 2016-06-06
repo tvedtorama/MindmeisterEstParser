@@ -4,9 +4,9 @@
 import {parseString} from 'xml2js'
 
 export class XmlConverter implements IXmlConverter{
-	convert(str: string) : any {
+	convert(str: string | Buffer) : any {
 		return new Promise((resolve, reject) => {
-			parseString(str, (err, res) => {
+			parseString(str.toString(), (err, res) => {
 				if (err)
 					reject(err)
 				else
