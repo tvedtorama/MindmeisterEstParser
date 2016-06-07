@@ -27,7 +27,7 @@ export class InfoCollector implements Contracts.IInfoCollector {
 	}
 
 	private cloneItem(src : any, parent: Contracts.RawData, data: Contracts.MindmeisterData) : Contracts.RawData {
-		let newItem = <Contracts.RawData>Object.assign({parent}, src)
+		let newItem = <Contracts.RawData>Object.assign({}, src)
 		let childItems = this.findChildItems(newItem, data)
 		let filterData = this.findPropertyChildren(childItems)
 		let mangledNewItem = <Contracts.RawData>Object.assign(newItem, 

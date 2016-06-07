@@ -7,65 +7,35 @@ export class Node extends Component {
   constructor(props) {
     super(props)
     this.handleIncrementClick = this.handleIncrementClick.bind(this)
-    this.handleRemoveClick = this.handleRemoveClick.bind(this)
-    this.handleAddChildClick = this.handleAddChildClick.bind(this)
     this.renderChild = this.renderChild.bind(this)
   }
 
   handleIncrementClick() {
-    const { increment, id } = this.props
-    increment(id)
+    const { increment, item } = this.props
+    increment(item.id)
   }
 
-  handleAddChildClick(e) {
-    e.preventDefault()
-
-    const { addChild, createNode, id } = this.props
-    const childId = createNode().nodeId
-    addChild(id, childId)
-  }
-
-  handleRemoveClick(e) {
-    e.preventDefault()
-
-    const { removeChild, deleteNode, parentId, id } = this.props
-    removeChild(parentId, id)
-    deleteNode(id)
-  }
-
-  renderChild(childId) {
-    const { id } = this.props
+  renderChild(child) {
     return (
-      <li key={childId}>
-        <ConnectedNode id={childId} parentId={id} />
+      <li key={child.id}>
+        <ConnectedNode item={child} />
       </li>
     )
   }
 
   render() {
-    const { counter, parentId, childIds } = this.props
+    const { title, estimate, children } = this.props
     return (
       <div>
-        Counter: {counter}
+        {title + " "}
+        {"{e: " + estimate + "}" }
         {' '}
         <button onClick={this.handleIncrementClick}>
           +
         </button>
         {' '}
-        {typeof parentId !== 'undefined' ?
-          <a href="#" onClick={this.handleRemoveClick}
-             style={{ color: 'lightgray', textDecoration: 'none' }}>
-            ×
-          </a> :
-          null
-        }
         <ul>
-          {childIds.map(this.renderChild)}
-          <li key="add">
-            <a href="#" onClick={this.handleAddChildClick}>
-              Add child
-            </a>
-          </li>
+          {children.map(this.renderChild)}
         </ul>
       </div>
     )
@@ -73,7 +43,7 @@ export class Node extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
-  return state[ownProps.id]
+  return {children: ownProps.item.children, title: ownProps.item.title, ...state[ownProps.item.id]}
 }
 
 const ConnectedNode = connect(mapStateToProps, actions)(Node)

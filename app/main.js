@@ -4,14 +4,14 @@ import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import Node from './containers/Node'
 import configureStore from './store/configureStore'
-import generateTree from './generateTree'
+import {State} from './state'
 
-const tree = generateTree()
+let tree = (new State(window.initialReactProps)).generateState()
 const store = configureStore(tree)
 
 render(
   <Provider store={store}>
-    <Node id={0} />
+    <Node item={initialReactProps} />
   </Provider>,
   document.getElementById('root')
 )
