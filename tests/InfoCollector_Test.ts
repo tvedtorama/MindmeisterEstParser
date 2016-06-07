@@ -53,7 +53,30 @@ describe("InfoCollector", () => {
 		rawDataNode.children[1].title.should.equal("heizenn2")
 		rawDataNode.children[1].estimate.should.equal(10.2)
 		rawDataNode.children[1].risk.should.equal(20)
-
 	})
 
+	it("should accept data in the middle of the tree", () => {
+		let sample = <Contracts.MindmeisterData>{
+			rsp: {
+				ideas: [
+					{ id: "hei", title: "hallo" },
+					{ id: "child", parentId: "hei", title: "heizenn" },
+					{ id: "prop", parentId: "child", title: "{e:200.5 s:the_huge}" },
+					{ id: "childchild", parentId: "child", title: "heizenn2" },
+					{ id: "prop2", parentId: "childchild", title: "{r:20 e:  10.2}}" },
+				]
+			}
+		}
+
+		let subject = new InfoCollector()
+
+		let rawDataNode = subject.collect(sample)
+
+		rawDataNode.children[0].title.should.equal("heizenn")
+		rawDataNode.children[0].children[0].title.should.equal("heizenn2")
+		rawDataNode.children[0].estimate.should.equal(200.5)
+		rawDataNode.children[0].sprint.should.equal("the_huge")
+		rawDataNode.children[0].children[0].estimate.should.equal(10.2)
+		rawDataNode.children[0].children[0].risk.should.equal(20)
+	})
 })
