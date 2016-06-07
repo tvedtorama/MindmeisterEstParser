@@ -72,7 +72,7 @@ function compileTypescript(fileSpec, folder, singleFile) {
 }
 
 function compileRuntime(watch) {
-  return compileBrowserify("./app/main.tsx", 'build/web', watch, true);
+  return compileBrowserify("./app/main.js", 'build/web', watch, true);
 }
 
 var serverPath = './server/**/*.ts'
@@ -88,6 +88,9 @@ function compileServer() {
 
 function compileTsAppForTests() {
 	return compileTypescript(appTsPath, './build/app') // Note: typescript requires the modules to be in the same relative directory.
+}
+function compileAppForTests() {
+	return compile(appPath, './build/app')
 }
 
 function compileTests() {
@@ -106,7 +109,8 @@ function sassIt(path) {
 }
 
 gulp.task('buildServer', function() { return compileServer(); });
-gulp.task('buildAppForTests', function() {return compileTsAppForTests(); })
+gulp.task('buildTsAppForTests', function() {return compileTsAppForTests(); })
+gulp.task('buildAppForTests', function() {return compileAppForTests(); })
 gulp.task('buildTestsCore', function() { return compileTests(); })
 gulp.task('buildTests', ['buildAppForTests', 'buildTestsCore']);
 gulp.task('buildRuntime', function() { return compileRuntime(); });
@@ -114,7 +118,8 @@ gulp.task('watchServer', function() { return gulp.watch(serverPath, function() {
 gulp.task('watchTestsCore', function() { return gulp.watch(testsPath, function() {compileTests()}) });
 gulp.task('watchTestsTsCore', function() { return gulp.watch(testsTsPath, function() {compileTestsTs()}) });
 gulp.task('watchTests', ['watchServer', 'watchTestsCore', 'watchTestsTsCore', 'watchAppForTests', 'watchTsAppForTests']);
-gulp.task('watchAppForTests', function() { return gulp.watch(appTsPath, function() {compileTsAppForTests()}) });
+gulp.task('watchAppForTests', function() { return gulp.watch(appPath, function() {compileAppForTests()}) });
+gulp.task('watchTsAppForTests', function() { return gulp.watch(appTsPath, function() {compileTsAppForTests()}) });
 // Note: This runs tests on changed outputs, but exits on problems.  Run watchTests and npm test instead.
 gulp.task('watchRunTests', function() { return gulp.watch('./build/**/*.js', function() {runTests()})});
 gulp.task('watchRuntime', function() { return compileRuntime(true); });

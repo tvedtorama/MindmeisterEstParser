@@ -4,12 +4,18 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --require source-map-support/register build/tests"
+    "test": "mocha --require source-map-support/register $(find build/tests -name '*.js')"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "express": "^4.13.4",
+    "express-handlebars": "^3.0.0",
     "lodash": "^4.13.1",
+    "react": "^15.1.0",
+    "react-dom": "^15.1.0",
+    "react-redux": "^4.4.5",
+    "redux": "^3.5.2",
     "xml2js": "^0.4.16"
   },
   "devDependencies": {
@@ -20,6 +26,9 @@
     "browserify": "^13.0.0",
     "chai": "^3.5.0",
     "chai-as-promised": "^5.3.0",
+    "deep-freeze": "0.0.1",
+    "enzyme": "^2.3.0",
+    "expect": "^1.20.1",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
     "gulp-concat": "^2.6.0",
@@ -28,6 +37,7 @@
     "gulp-sourcemaps": "^1.6.0",
     "gulp-typescript": "^2.13.4",
     "mocha": "^2.4.5",
+    "react-addons-test-utils": "^15.1.0",
     "retyped-x2js-tsd-ambient": "0.0.0-0",
     "source-map-support": "^0.4.0",
     "tsify": "^0.15.5",
