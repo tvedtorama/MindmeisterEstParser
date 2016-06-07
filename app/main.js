@@ -6,7 +6,8 @@ import Node from './containers/Node'
 import configureStore from './store/configureStore'
 import {State} from './state'
 
-let tree = (new State(window.initialReactProps)).generateState()
+let tree = (new State(window.initialReactProps)).generateStateAndApplyParent()
+State.generateAutoPropsRecursive(window.initialReactProps, tree)
 const store = configureStore(tree)
 
 render(

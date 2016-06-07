@@ -2,6 +2,7 @@ import React from 'react'
 import { Component } from 'react'
 import { connect } from 'react-redux'
 import * as actions from '../actions'
+import * as _ from 'lodash'
 
 export class Node extends Component {
   constructor(props) {
@@ -24,12 +25,11 @@ export class Node extends Component {
   }
 
   render() {
-    const { title, estimate, children } = this.props
+    const { title, estimate, calculatedEstimate, children } = this.props
     return (
       <div>
-        {title + " "}
-        {"{e: " + estimate + "}" }
-        {' '}
+        <div className="title">{title + " "}</div>
+        <div className={!_.isUndefined(estimate) ? "gotEstimate" : ""}>{"{e: " + calculatedEstimate + "} " }</div>
         <button onClick={this.handleIncrementClick}>
           +
         </button>
