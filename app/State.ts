@@ -9,19 +9,14 @@ export class State {
 
 	}
 
-/*	private _getItem(rawData: Contracts.RawData, id: string) : Contracts.RawData {
-		if (rawData.id === id) {
-			return rawData
-		}
-		return _(rawData.children).map(x => this._getItem(x, id)).filter(x => !_.isUndefined(x)).take(1).value()[0]
-	}
-
-	getItem(id: string) {
-		return this._getItem(this.rawData, id)
-	} */
-
 	private _generateState(rawData: Contracts.RawData, state: { [index: string]: Contracts.StateItem }): { [index: string]: Contracts.StateItem } {
-		state[rawData.id] = <Contracts.StateItem>{estimate: rawData.estimate, priority: rawData.priority, risk: rawData.risk, sprint: rawData.sprint}
+		state[rawData.id] = <Contracts.StateItem>{
+			estimate: rawData.estimate, 
+			priority: rawData.priority, 
+			risk: rawData.risk, 
+			sprint: rawData.sprint,
+			item: rawData,
+		}
 		_(rawData.children).each(x => {
 			this._generateState(x, state)
 			x.parent = rawData
@@ -51,6 +46,6 @@ export class State {
 		let calculatedEstimate = State._findItems(rawData, state, false, x => x.estimate).reduce((acc, val) => acc + val, 0)
 		let calculatedPriority = State._findItems(rawData, state, true, x => x.priority).reduce((acc, val) => val, 1)
 		let calculatedSprint = State._findItems(rawData, state, true, x => x.sprint).reduce((acc, val) => val, "")
-		return Object.assign({ calculatedEstimate, calculatedSprint, calculatedPriority }, state[rawData.id])
+		return Object.assign({}, state[rawData.id], { calculatedEstimate, calculatedSprint, calculatedPriority })
 	}
 }

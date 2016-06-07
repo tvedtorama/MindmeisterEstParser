@@ -9,5 +9,7 @@ namespace Contracts {
 		calculatedEstimate?: number
 		calculatedPriority?: number
 		calculatedSprint?: string
+
+		item: Contracts.RawData
 	}
 }

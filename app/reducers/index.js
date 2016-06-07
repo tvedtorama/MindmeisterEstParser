@@ -1,16 +1,33 @@
 import { INCREMENT } from '../actions'
 
+import * as _ from 'lodash'
 
-function node(state, action) {
+import {State} from '../State'
+
+const updateUp = "UP"
+const updateDown = "DOWN"
+const updateNone = "NONE"
+
+function node(state, action, nodeId) {
   switch (action.type) {
     case INCREMENT:
-      return Object.assign({}, state, {
+      return [{key: nodeId, newState: Object.assign({}, state, {
         estimate: state.estimate + 1
-      })
+      }), updateMode: updateUp }]
     default:
-      return state
+      return []
   }
 }
+
+function iterateUp(node) {
+  let parent = node.item
+  let retVal = []
+  while (parent) {
+    retVal.push(parent)
+    parent = parent.parent
+  }
+  return retVal
+} 
 
 export default function (state = {}, action) {
   const { nodeId } = action
@@ -18,7 +35,21 @@ export default function (state = {}, action) {
     return state
   }
 
-  return Object.assign({}, state, {
-    [nodeId]: node(state[nodeId], action)
-  })
+  let update = node(state[nodeId], action, nodeId)
+  if (update.length === 0)
+    return state
+
+  let newState = Object.assign({}, state, 
+    _.fromPairs(update.map(x => [x.key, x.newState]))
+  )
+
+  if (update.filter(x => x.updateMode != updateNone).length === 0)
+    return newState
+
+//  let theUpdate = update[0]
+  let recalculatedItems = iterateUp(newState[nodeId]).map(x => ({key: x.id, newState: State.calculateAutoProps(x, newState)}))
+
+  return Object.assign({}, newState, 
+    _.fromPairs(recalculatedItems.map(x => [x.key, x.newState]))
+  )
 }

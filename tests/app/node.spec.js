@@ -13,7 +13,7 @@ function setup(id, counter, childIds, parentId) {
   }
 
   const component = shallow(
-    <Node item={{id}} estimate={counter} parentId={parentId} children={childIds} {...actions} />
+    <Node item={{id}} calculatedEstimate={counter} parentId={parentId} children={childIds} {...actions} />
   )
 
   return {

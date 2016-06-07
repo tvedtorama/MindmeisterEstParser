@@ -10,18 +10,31 @@ describe('reducer', () => {
 
   it('should handle INCREMENT action', () => {
     const stateBefore = {
+      'node_parent': {
+        id: 'node_parent',
+        calculatedEstimate: 200,
+      },
       'node_0': {
+        item: {parent: {id: 'node_parent', children: [{id: "node_0", children: []}]}, children: [], id: 'node_0'},
         id: 'node_0',
         estimate: 0,
-        childIds: []
       }
     }
     const action = increment('node_0')
     const stateAfter = {
+      'node_parent': {
+        id: 'node_parent',
+        calculatedEstimate: 1,
+        calculatedPriority: 1,
+        calculatedSprint: "",
+      },
       'node_0': {
+        item: {parent: {id: 'node_parent', children: [{id: "node_0", children: []}]}, children: [], id: 'node_0'},
         id: 'node_0',
         estimate: 1,
-        childIds: []
+        calculatedEstimate: 1,
+        calculatedPriority: 1,
+        calculatedSprint: "",
       }
     }
 
