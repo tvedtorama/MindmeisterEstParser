@@ -36,52 +36,18 @@
 		</idea>
 		<idea>
 			<id>711166078</id>
-			<title>{e:20}</title>
+			<title>{e:20 p:2}</title>
 			<parent>711164161</parent>
 		</idea>
 		<idea>
 			<id>711164692</id>
 			<title>Project</title>
 			<parent>711134897</parent>
-			<rank>1</rank>
-			<icon/>
-			<style>454a4c,100,0,0,,2,</style>
-			<note/>
-			<link/>
-			<pos/>
-			<task/>
-			<floating/>
-			<modifiedat>2016-06-03 07:51:20</modifiedat>
-			<boundary/>
-			<attachments/>
-			<image/>
-			<video/>
-			<comments/>
-			<votes/>
-			<closed/>
-			<modifiedby>904767</modifiedby>
 		</idea>
 		<idea>
 			<id>711164358</id>
-			<title>Invite to project</title>
+			<title>{e:2 p:3.2}</title>
 			<parent>711164692</parent>
-			<rank>0</rank>
-			<icon/>
-			<style>454a4c,100,0,0,,2,</style>
-			<note/>
-			<link/>
-			<pos/>
-			<task/>
-			<floating/>
-			<modifiedat>2016-06-03 07:51:26</modifiedat>
-			<boundary/>
-			<attachments/>
-			<image/>
-			<video/>
-			<comments/>
-			<votes/>
-			<closed/>
-			<modifiedby>904767</modifiedby>
 		</idea>
 		<idea>
 			<id>711164645</id>

@@ -4,4 +4,15 @@
 
 .got-estimate {
 	color: green;
+	text-decoration: underline;
+}
+
+.got-priority {}
+
+.priority_1 {
+	font-weight: bold;
+}
+
+.priority_3, .priority_4 {
+	color: gray;
 }

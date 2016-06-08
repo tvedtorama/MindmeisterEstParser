@@ -24,14 +24,16 @@ export class Node extends Component {
   }
 
   render() {
-    const { title, estimate, calculatedEstimate, children } = this.props
+    const { title, estimate, priority, calculatedEstimate, calculatedPriority, children } = this.props
     const gotEstimate = !_.isUndefined(estimate)
+    const gotPriority = !_.isUndefined(priority)    
     return (
       <div>
         <div className="node-data">
-          <div className="title">{title + " "}</div>
-          <div className={gotEstimate ? "got-estimate" : ""}>{"{e: " + calculatedEstimate + "} " }</div>
+          <div className={"title priority_" + Math.floor(calculatedPriority)}>{title + " "}</div>
+          <div className={gotEstimate ? "got-estimate" : ""}>{"{e:" + calculatedEstimate + "} " }</div>
           {gotEstimate ? [<button key="up" onClick={() => this.handleIncrementClick(1)}>+</button>, <button key="dn" onClick={e => this.handleIncrementClick(-1)}>-</button>] : null}
+          <div className={gotPriority ? "got-priority" : ""}>{"{p:" + calculatedPriority + "}"}</div>
         </div>
         <ul>
           {children.map(this.renderChild)}
