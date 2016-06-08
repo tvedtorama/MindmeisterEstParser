@@ -1,6 +1,7 @@
 {
     "compilerOptions": {
-        "module": "commonjs",
+        "module": "CommonJS",
+        "moduleResolution": "node",
         "target": "es6"
     },
     "filesGlob": [
