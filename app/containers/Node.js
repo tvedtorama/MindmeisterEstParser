@@ -15,6 +15,11 @@ export class Node extends Component {
     increment(item.id, amt)
   }
 
+  handleToggleChildrenClick() {
+    const { toggleChildren, item } = this.props
+    toggleChildren(item.id)
+  }
+
   renderChild(child) {
     return (
       <li key={child.id}>
@@ -24,20 +29,23 @@ export class Node extends Component {
   }
 
   render() {
-    const { title, estimate, priority, calculatedEstimate, calculatedPriority, children } = this.props
+    const { title, estimate, priority, calculatedEstimate, calculatedPriority, children, hideChildren } = this.props
     const gotEstimate = !_.isUndefined(estimate)
     const gotPriority = !_.isUndefined(priority)    
     return (
       <div>
         <div className="node-data">
-          <div className={"title priority_" + Math.floor(calculatedPriority)}>{title + " "}</div>
+          <div className={"title priority_" + Math.floor(calculatedPriority)} onClick={e => this.handleToggleChildrenClick()} >{title + " " + (hideChildren && children.length ? "(+) " : "")}</div>
           <div className={gotEstimate ? "got-estimate" : ""}>{"{e:" + calculatedEstimate + "} " }</div>
           {gotEstimate ? [<button key="up" onClick={() => this.handleIncrementClick(1)}>+</button>, <button key="dn" onClick={e => this.handleIncrementClick(-1)}>-</button>] : null}
           <div className={gotPriority ? "got-priority" : ""}>{"{p:" + calculatedPriority + "}"}</div>
         </div>
-        <ul>
-          {children.map(this.renderChild)}
-        </ul>
+        { 
+          hideChildren ? null :
+          <ul>
+            {children.map(this.renderChild)}
+          </ul>
+        }
       </div>
     )
   }

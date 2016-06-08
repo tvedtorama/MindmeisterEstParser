@@ -1,4 +1,4 @@
-import { INCREMENT } from '../actions'
+import { INCREMENT, TOGGLE_CHILDREN } from '../actions'
 
 import * as _ from 'lodash'
 
@@ -14,6 +14,10 @@ function node(state, action, nodeId) {
       return [{key: nodeId, newState: Object.assign({}, state, {
         estimate: Math.max(state.estimate + action.amount, 0)
       }), updateMode: updateUp }]
+      case TOGGLE_CHILDREN:
+      return [{key: nodeId, newState: Object.assign({}, state, {
+        hideChildren: !state.hideChildren
+      }), updateMode: updateNone }]
     default:
       return []
   }
