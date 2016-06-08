@@ -18,6 +18,8 @@ router.use("/:mapId/:authToken", (req, res) => {
 		let collector = Factory.getInfoCollector()
 		let initialState = collector.collect(result)
 		res.render('home', { lang: "en", title: "hei", html: "<span>hei</span>", initialState: JSON.stringify(initialState) })
+	}).catch(err => {
+		res.render('error', { lang: "en", title: "error", html: `<span>${err}</span>`, initialState: JSON.stringify({ cool: true }) })
 	})
 })
 
