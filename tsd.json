@@ -15,7 +15,7 @@
       "commit": "8886ae591751e8a8237fa855617745768f0b1bdf"
     },
     "node/node.d.ts": {
-      "commit": "edb64e4a35896510ce02b93c0bca5ec3878db738"
+      "commit": "e010f8d25d751adfe446012643fb173fb467cecc"
     },
     "lodash/lodash.d.ts": {
       "commit": "1be72cdce38fa12471085ac2cf39b0a901321720"
@@ -99,10 +99,22 @@
       "commit": "edb64e4a35896510ce02b93c0bca5ec3878db738"
     },
     "jquery/jquery.d.ts": {
-      "commit": "edb64e4a35896510ce02b93c0bca5ec3878db738"
+      "commit": "220d2c2b5fd4acbd52737e676b24cdaed4ed427b"
     },
     "xml2js/xml2js.d.ts": {
       "commit": "473232e5dbd179e9ee682fab12f796720f37b118"
+    },
+    "md5/md5.d.ts": {
+      "commit": "220d2c2b5fd4acbd52737e676b24cdaed4ed427b"
+    },
+    "js-md5/md5.d.ts": {
+      "commit": "220d2c2b5fd4acbd52737e676b24cdaed4ed427b"
+    },
+    "request/request.d.ts": {
+      "commit": "e010f8d25d751adfe446012643fb173fb467cecc"
+    },
+    "form-data/form-data.d.ts": {
+      "commit": "e010f8d25d751adfe446012643fb173fb467cecc"
     }
   }
 }

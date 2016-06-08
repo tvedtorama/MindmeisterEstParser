@@ -9,6 +9,18 @@ import {Factory} from './Factory'
 
 var router = express.Router()
 
+router.use("/:mapId/:authToken", (req, res) => {
+	let mindMeister = Factory.getMindmeisterApi()
+	mindMeister.downloadMap(req.params.mapId, Factory.getMindmeisterSecurityData(req)).then(x => {
+		let xmlConverter = Factory.getXmlConverter()
+		return xmlConverter.convert(x)
+	}).then(result => {
+		let collector = Factory.getInfoCollector()
+		let initialState = collector.collect(result)
+		res.render('home', { lang: "en", title: "hei", html: "<span>hei</span>", initialState: JSON.stringify(initialState) })
+	})
+})
+
 router.use("/$", (req, res) => {
 
 	let xmlConverter = Factory.getXmlConverter()
