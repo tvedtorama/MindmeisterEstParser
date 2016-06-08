@@ -3,6 +3,7 @@ import React from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import Node from './containers/Node'
+import Filter from './containers/Filter'
 import configureStore from './store/configureStore'
 import {State} from './state'
 
@@ -12,7 +13,10 @@ const store = configureStore(tree)
 
 render(
   <Provider store={store}>
-    <Node item={initialReactProps} />
+  	<div>
+		<Filter />
+		<Node item={initialReactProps} />
+    </div>
   </Provider>,
   document.getElementById('root')
 )

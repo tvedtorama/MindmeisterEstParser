@@ -29,9 +29,12 @@ export class Node extends Component {
   }
 
   render() {
-    const { title, estimate, priority, calculatedEstimate, calculatedPriority, children, hideChildren } = this.props
+    const { title, estimate, priority, calculatedEstimate, calculatedPriority, children, hideChildren, exclude } = this.props
+    if (exclude)
+      return <div/>;
+
     const gotEstimate = !_.isUndefined(estimate)
-    const gotPriority = !_.isUndefined(priority)    
+    const gotPriority = !_.isUndefined(priority)
     return (
       <div>
         <div className="node-data">

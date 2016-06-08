@@ -43,7 +43,7 @@ export class State {
 	}
 
 	static calculateAutoProps(rawData: Contracts.RawData, state: {[index: string] : Contracts.StateItem}) : Contracts.StateItem {
-		let calculatedEstimate = State._findItems(rawData, state, false, x => x.estimate).reduce((acc, val) => acc + val, 0)
+		let calculatedEstimate = State._findItems(rawData, state, false, x => x.exclude ? undefined : x.estimate).reduce((acc, val) => acc + val, 0)
 		let calculatedPriority = State._findItems(rawData, state, true, x => x.priority).reduce((acc, val) => val, 1)
 		let calculatedSprint = State._findItems(rawData, state, true, x => x.sprint).reduce((acc, val) => val, "")
 		return Object.assign({}, state[rawData.id], { calculatedEstimate, calculatedSprint, calculatedPriority })

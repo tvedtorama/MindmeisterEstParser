@@ -10,6 +10,9 @@ namespace Contracts {
 		calculatedPriority?: number
 		calculatedSprint?: string
 
+		exclude?: boolean
+		hideChildren?: boolean
+
 		item: Contracts.RawData
 	}
 }

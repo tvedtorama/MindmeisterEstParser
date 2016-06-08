@@ -1,4 +1,4 @@
-import { INCREMENT, TOGGLE_CHILDREN } from '../actions'
+import { INCREMENT, TOGGLE_CHILDREN, FILTER } from '../actions'
 
 import * as _ from 'lodash'
 
@@ -33,7 +33,24 @@ function iterateUp(node) {
   return retVal
 } 
 
+function createNewState(state, update) {
+  return Object.assign({}, state, 
+    _.fromPairs(update.map(x => [x.key, x.newState]))
+  )
+}
+
 export default function (state = {}, action) {
+  if (action.type === FILTER) {
+    let update = _.toPairs(state).map(x => ({key: x[0], curState: x[1]})).
+      map(x => ({pair: x, correct: (x.curState.calculatedPriority <= action.maxPri) === (x.curState.exclude ? false : true)})).
+      filter(x => !x.correct).
+      map(x => ({key: x.pair.key, newState: Object.assign({}, x.pair.curState, {
+        exclude: !x.pair.curState.exclude
+      })}))
+
+      return createNewState(state, update)
+  }
+
   const { nodeId } = action
   if (typeof nodeId === 'undefined') {
     return state
@@ -43,9 +60,7 @@ export default function (state = {}, action) {
   if (update.length === 0)
     return state
 
-  let newState = Object.assign({}, state, 
-    _.fromPairs(update.map(x => [x.key, x.newState]))
-  )
+  let newState = createNewState(state, update)
 
   if (update.filter(x => x.updateMode != updateNone).length === 0)
     return newState
