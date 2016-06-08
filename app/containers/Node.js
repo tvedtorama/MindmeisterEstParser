@@ -7,13 +7,12 @@ import * as _ from 'lodash'
 export class Node extends Component {
   constructor(props) {
     super(props)
-    this.handleIncrementClick = this.handleIncrementClick.bind(this)
     this.renderChild = this.renderChild.bind(this)
   }
 
-  handleIncrementClick() {
+  handleIncrementClick(amt) {
     const { increment, item } = this.props
-    increment(item.id)
+    increment(item.id, amt)
   }
 
   renderChild(child) {
@@ -32,7 +31,7 @@ export class Node extends Component {
         <div className="node-data">
           <div className="title">{title + " "}</div>
           <div className={gotEstimate ? "got-estimate" : ""}>{"{e: " + calculatedEstimate + "} " }</div>
-          {gotEstimate ? <button onClick={this.handleIncrementClick}>+</button> : null}
+          {gotEstimate ? [<button key="up" onClick={() => this.handleIncrementClick(1)}>+</button>, <button key="dn" onClick={e => this.handleIncrementClick(-1)}>-</button>] : null}
         </div>
         <ul>
           {children.map(this.renderChild)}

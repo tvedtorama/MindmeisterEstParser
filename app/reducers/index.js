@@ -12,7 +12,7 @@ function node(state, action, nodeId) {
   switch (action.type) {
     case INCREMENT:
       return [{key: nodeId, newState: Object.assign({}, state, {
-        estimate: state.estimate + 1
+        estimate: Math.max(state.estimate + action.amount, 0)
       }), updateMode: updateUp }]
     default:
       return []
