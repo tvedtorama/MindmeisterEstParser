@@ -14,3 +14,13 @@ For this to work, a special syntax is used, where nodes are appended to the targ
     {e:nn p:nn r:nn s:aa}
 
 Where nn is any number, aa is alhphanumerical.  
+
+To start:
+
+API_KEY='xxxxxx' SECRET_KEY='xxxxxx' node index.js
+
+URL:
+
+http://localhost:3000/[MapId]/[AuthCode]
+
+The mapId are found by opening the map in the GUI.  The AuthCode can be obtained by using the API test tools, just make sure you are operating on the right API_KEY.
