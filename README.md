@@ -3,6 +3,7 @@
 Estimating requires agility to deal with the dynamic and uncertain nature of the craft.  Mindmeister allows information structures to be editied efficiently, but does not offer estimate aggregation or simple meta data association.
 
 **Note:** This tool does not use the estimates stored on the items' properties, rather its own system.
+**Note:** The tool was built as a training excercise for React Redux, and the code is based on a example.  Don't expect the best quality code.
 
 The aim of this project has been to create a separate GUI for Mindmeister, where the following can be editied efficiently within the mind map:
 
@@ -20,6 +21,10 @@ Where nn is any number, aa is alhphanumerical.
 Sample notation, usage:
 
 ![Sample](MM_Snap_with_estimates.png)
+
+Sample output:
+
+![Sample](SampleOutput.png)
 
 To start:
 
