@@ -22,7 +22,7 @@ export class InfoCollector implements Contracts.IInfoCollector {
 
 		return {
 			filteredList: items.filter(x => x.properties.length === 0).map(x => x.x),
-			properties: _.fromPairs(_.flatten(items.map(x => x.properties.map(p => ({k: p.key, v: p.value})))).map(p => [p.k, p.v]))
+			properties: _.fromPairs(_.flatten(items.map(x => x.properties)).map(p => [p.key, p.value]))
 		}
 	}
 

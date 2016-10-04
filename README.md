@@ -23,4 +23,7 @@ URL:
 
 http://localhost:3000/[MapId]/[AuthCode]
 
-The mapId are found by opening the map in the GUI.  The AuthCode can be obtained by using the API test tools, just make sure you are operating on the right API_KEY.
+The mapId are found by opening the map in the GUI.  The AuthCode can be obtained by using the API test tools, just make sure you are operating on the corresponding API_KEY.
+
+This tool was built to support the development of the (Digital Value Network)[digitalvaluenetwork.com]
+

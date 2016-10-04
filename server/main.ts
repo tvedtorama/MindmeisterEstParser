@@ -6,7 +6,6 @@
 import * as express from 'express'
 import * as exphbs from 'express-handlebars'
 import * as http from 'http'
-import * as bodyParser from 'body-parser'
 import {router} from './routing'
 
 
