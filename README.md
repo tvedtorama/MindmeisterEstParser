@@ -17,7 +17,8 @@ For this to work, a special syntax is used, where nodes are appended to the targ
 
 Where nn is any number, aa is alhphanumerical.  
 
-Sample tasks:
+Sample notation, usage:
+
 ![Sample](MM_Snap_with_estimates.png)
 
 To start:
